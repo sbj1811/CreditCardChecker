@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">CreditCardChecker</string>
+    <string name="action_settings">Settings</string>
+    <string name="cc_number_hint">4242 4242 4242 4242</string>
+    <string name="expiry_date">Expiry</string>
+    <string name="select">SELECT</string>
+    <string name="cvv">CVV</string>
+    <string name="cvv_hint">XXX</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="submit">SUBMIT</string>
+    <string name="cc_image">CC_IMAGE</string>
+    <string name="expiry_hint_year">YYYY</string>
+    <string name="expiry_hint_month">MM</string>
+
+    <string name="month1">01</string>
+    <string name="month2">02</string>
+    <string name="month3">03</string>
+    <string name="month4">04</string>
+    <string name="month5">05</string>
+    <string name="month6">06</string>
+    <string name="month7">07</string>
+    <string name="month8">08</string>
+    <string name="month9">09</string>
+    <string name="month10">10</string>
+    <string name="month11">11</string>
+    <string name="month12">12</string>
+
+    <string name="year1">2014</string>
+    <string name="year2">2015</string>
+    <string name="year3">2016</string>
+    <string name="year4">2017</string>
+    <string name="year5">2018</string>
+    <string name="year6">2019</string>
+    <string name="year7">2020</string>
+    <string name="year8">2021</string>
+    <string name="year9">2022</string>
+    <string name="year10">2023</string>
+    <string name="year11">2024</string>
+    <string name="year12">2025</string>
+
+</resources>
