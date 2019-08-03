@@ -66,9 +66,9 @@
                     android:id="@+id/cc_number_ll"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="@dimen/std_padding"
+                    android:layout_marginTop="@dimen/std_padding"
+                    android:layout_marginEnd="@dimen/std_padding"
                     android:background="@drawable/linear_layout_bg"
                     android:orientation="horizontal"
                     android:padding="@dimen/std_padding"
@@ -99,11 +99,9 @@
                     android:id="@+id/expiry_ll"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_margin="@dimen/std_padding"
                     android:background="@drawable/linear_layout_bg"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:padding="@dimen/std_padding"
                     app:layout_constraintEnd_toStartOf="@id/cvv_ll"
                     app:layout_constraintStart_toStartOf="parent"
@@ -113,23 +111,85 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-medium"
+                        android:paddingTop="@dimen/std_padding"
+                        android:paddingBottom="@dimen/std_padding"
                         android:text="@string/expiry_date"
                         android:textAppearance="?android:textAppearanceMedium"
-                        android:textColor="#AEB6BD" />
+                        android:textColor="@color/field_label" />
 
-                    <androidx.appcompat.widget.AppCompatSpinner
-                        android:id="@+id/expiry_month_spinner"
-                        bind:expMon="@={viewModel.creditCardForm.creditCard.expiryMonth}"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:adapter="@{spinAdapterMonth}" />
+                        android:orientation="horizontal"
+                        android:paddingTop="@dimen/std_padding"
+                        android:paddingBottom="@dimen/std_padding">
 
-                    <androidx.appcompat.widget.AppCompatSpinner
-                        android:id="@+id/expiry_year_spinner"
-                        bind:expYr="@={viewModel.creditCardForm.creditCard.expiryYear}"
+                        <androidx.appcompat.widget.AppCompatSpinner
+                            android:id="@+id/expiry_month_spinner"
+                            bind:expMon="@={viewModel.creditCardForm.creditCard.expiryMonth}"
+                            android:layout_width="wrap_content"
+
+                            android:layout_height="wrap_content"
+                            app:adapter="@{spinAdapterMonth}" />
+
+
+                        <androidx.appcompat.widget.AppCompatSpinner
+                            android:id="@+id/expiry_year_spinner"
+                            bind:expYr="@={viewModel.creditCardForm.creditCard.expiryYear}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:adapter="@{spinAdapterYear}" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/cvv_ll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/linear_layout_bg"
+                    android:orientation="vertical"
+                    android:padding="@dimen/std_padding"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/expiry_ll"
+                    app:layout_constraintTop_toBottomOf="@id/cc_number_ll">
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:adapter="@{spinAdapterYear}" />
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="@string/cvv"
+                            android:textAppearance="?android:textAppearanceMedium"
+                            android:textColor="@color/field_label" />
+
+                        <ImageView
+                            android:id="@+id/cvv_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:contentDescription="@string/info"
+                            android:src="@drawable/ic_info_outline" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/edit_ccv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/cvv_hint"
+                        android:inputType="text|numberDecimal"
+                        android:text="@={viewModel.creditCardForm.creditCard.cvv}"
+                        app:onFocus="@{viewModel.getOnFocusCvv()}" />
+
 
                 </LinearLayout>
 
@@ -141,51 +201,16 @@
                     android:contentDescription="@string/cc_image"
                     app:imageUrl="@{viewModel.imageUrl}"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/expiry_ll" />
-
-
-                <LinearLayout
-                    android:id="@+id/cvv_ll"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/linear_layout_bg"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/std_padding"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/expiry_ll"
-                    app:layout_constraintTop_toBottomOf="@id/cc_number_ll">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="@string/cvv"
-                        android:textAppearance="?android:textAppearanceMedium"
-                        android:textColor="#AEB6BD" />
-
-                    <EditText
-                        android:id="@+id/edit_ccv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:hint="@string/cvv_hint"
-                        android:inputType="text|numberDecimal"
-                        android:text="@={viewModel.creditCardForm.creditCard.cvv}"
-                        app:onFocus="@{viewModel.getOnFocusCvv()}" />
-
-                </LinearLayout>
+                    app:layout_constraintStart_toStartOf="@id/guideline"
+                    app:layout_constraintTop_toBottomOf="@id/cvv_ll" />
 
                 <LinearLayout
                     android:id="@+id/first_name_ll"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="@dimen/std_padding"
+                    android:layout_marginTop="@dimen/std_padding"
+                    android:layout_marginEnd="@dimen/std_padding"
                     android:background="@drawable/linear_layout_bg"
                     android:orientation="horizontal"
                     android:padding="@dimen/std_padding"
@@ -200,14 +225,14 @@
                         android:fontFamily="sans-serif-medium"
                         android:text="@string/first_name"
                         android:textAppearance="?android:textAppearanceMedium"
-                        android:textColor="#AEB6BD" />
+                        android:textColor="@color/field_label" />
 
                     <EditText
                         android:id="@+id/edit_first_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
-                        android:hint="@string/cvv_hint"
+                        android:hint="@string/first_name_hint"
                         android:inputType="text|textPersonName|textCapWords"
                         android:text="@={viewModel.creditCardForm.creditCard.firstName}"
                         app:onFocus="@{viewModel.getOnFocusFirstName()}" />
@@ -218,9 +243,9 @@
                     android:id="@+id/last_name_ll"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="@dimen/std_padding"
+                    android:layout_marginTop="@dimen/std_padding"
+                    android:layout_marginEnd="@dimen/std_padding"
                     android:background="@drawable/linear_layout_bg"
                     android:orientation="horizontal"
                     android:padding="@dimen/std_padding"
@@ -235,14 +260,14 @@
                         android:fontFamily="sans-serif-medium"
                         android:text="@string/last_name"
                         android:textAppearance="?android:textAppearanceMedium"
-                        android:textColor="#AEB6BD" />
+                        android:textColor="@color/field_label" />
 
                     <EditText
                         android:id="@+id/edit_last_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
-                        android:hint="@string/cvv_hint"
+                        android:hint="@string/last_name_hint"
                         android:inputType="text|textPersonName|textCapWords"
                         android:text="@={viewModel.creditCardForm.creditCard.lastName}"
                         app:onFocus="@{viewModel.getOnFocusLastName()}" />
@@ -266,7 +291,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
-
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

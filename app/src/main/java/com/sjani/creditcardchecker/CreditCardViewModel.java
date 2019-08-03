@@ -1,18 +1,14 @@
 package com.sjani.creditcardchecker;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import androidx.databinding.BindingAdapter;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-
+import com.sjani.creditcardchecker.bindings.CreditCardBindingAdapter;
 import com.sjani.creditcardchecker.model.CreditCardForm;
-import com.squareup.picasso.Picasso;
 
 
 public class CreditCardViewModel extends ViewModel {
@@ -33,7 +29,7 @@ public class CreditCardViewModel extends ViewModel {
             if (et.getText().length() > 0 && !focused) {
                 creditCardForm.isValidCardNumber();
                 ImageView im = view.getRootView().findViewById(R.id.card_type_image);
-                loadImage(im,creditCardForm.getCreditCard().getCardImage());
+                CreditCardBindingAdapter.loadImage(im, creditCardForm.getCreditCard().getCardImage());
             }
         };
 
@@ -82,7 +78,7 @@ public class CreditCardViewModel extends ViewModel {
         creditCardForm.onClick();
     }
 
-    public CreditCardForm getCreditCardForm(){
+    public CreditCardForm getCreditCardForm() {
         return creditCardForm;
     }
 
@@ -110,25 +106,9 @@ public class CreditCardViewModel extends ViewModel {
         return onFocusExpiryYear;
     }
 
-    @BindingAdapter("onFocus")
-    public static void bindFocusChange(EditText editText, View.OnFocusChangeListener onFocusChangeListener) {
-        if (editText.getOnFocusChangeListener() == null) {
-            editText.setOnFocusChangeListener(onFocusChangeListener);
-        }
-    }
 
     public String getImageUrl() {
         return creditCardForm.getCreditCard().getCardImage();
-    }
-
-    @BindingAdapter({"bind:imageUrl"})
-    public static void loadImage(ImageView view, String imageUrl) {
-        int resourceId = view.getContext().getResources().getIdentifier(""+imageUrl, "drawable", view.getContext().getPackageName());
-        if(imageUrl !=null && !imageUrl.isEmpty()) {
-            Picasso.with(view.getContext())
-                    .load(resourceId)
-                    .into(view);
-        }
     }
 
 

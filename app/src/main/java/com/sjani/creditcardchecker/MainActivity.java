@@ -1,7 +1,11 @@
 package com.sjani.creditcardchecker;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,6 +43,22 @@ public class MainActivity extends AppCompatActivity {
         activityMainBinding.setViewModel(viewModel);
         activityMainBinding.setSpinAdapterMonth(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, months));
         activityMainBinding.setSpinAdapterYear(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, years));
+        activityMainBinding.cvvInfo.setOnClickListener(imageView -> {
+            final Dialog dialog = new Dialog(MainActivity.this);
+            dialog.setContentView(R.layout.info_dialog);
+            String title = getString(R.string.cvv_dialog_title);
+            dialog.setTitle(title);
+            TextView text = (TextView) dialog.findViewById(R.id.cvv_dialog_text);
+            String message = getString(R.string.cvv_info_text_line_1) + "\n\n" +
+                    getString(R.string.cvv_info_text_line_2);
+            text.setText(message);
+            ImageView image = (ImageView) dialog.findViewById(R.id.cvv_dialog_image);
+
+            Button dialogButton = (Button) dialog.findViewById(R.id.cvv_dialog_button);
+            dialogButton.setOnClickListener(button -> dialog.dismiss());
+
+            dialog.show();
+        });
         setupSubmitbutton();
     }
 
@@ -46,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
      * Handles submit button click
      */
     private void setupSubmitbutton() {
-        viewModel.getCreditCardData().observe(this, isSuccess -> {
-            if (isSuccess) {
+        viewModel.getCreditCardData().observe(this, aBoolean -> {
+            if (aBoolean) {
                 Toast.makeText(MainActivity.this, "Success! Credit card saved!", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(MainActivity.this, "Invalid: Please enter missing/correct credit card details!", Toast.LENGTH_SHORT).show();

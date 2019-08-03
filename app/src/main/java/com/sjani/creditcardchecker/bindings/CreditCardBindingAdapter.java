@@ -4,16 +4,20 @@ import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.InverseBindingAdapter;
 import androidx.databinding.InverseBindingListener;
 
+import com.squareup.picasso.Picasso;
 
-public class SpinnerBindingAdapter {
 
-    private static final String TAG = SpinnerBindingAdapter.class.getSimpleName();
+public class CreditCardBindingAdapter {
+
+    private static final String TAG = CreditCardBindingAdapter.class.getSimpleName();
 
 
     /**
@@ -23,7 +27,7 @@ public class SpinnerBindingAdapter {
      * @param selectedExpMon
      * @param changeListener
      */
-    @BindingAdapter(value = {"bind:expMon", "bind:expMonChanged"}, requireAll = false)
+    @BindingAdapter(value = {"expMon", "expMonChanged"}, requireAll = false)
     public static void setExpMon(final AppCompatSpinner spinner,
                                  final String selectedExpMon,
                                  final InverseBindingListener changeListener) {
@@ -43,7 +47,7 @@ public class SpinnerBindingAdapter {
 
     }
 
-    @InverseBindingAdapter(attribute = "bind:expMon", event = "bind:expMonChanged")
+    @InverseBindingAdapter(attribute = "expMon", event = "expMonChanged")
     public static String getExpMon(final AppCompatSpinner spinner) {
         return (String) spinner.getSelectedItem();
     }
@@ -67,8 +71,8 @@ public class SpinnerBindingAdapter {
      * @param selectedExpYr
      * @param changeListener
      */
-    @BindingAdapter(value = {"bind:expYr",
-            "bind:expYrChanged"}, requireAll = false)
+    @BindingAdapter(value = {"expYr",
+            "expYrChanged"}, requireAll = false)
     public static void setExpYr(final AppCompatSpinner spinner,
                                 final String selectedExpYr,
                                 final InverseBindingListener changeListener) {
@@ -87,8 +91,8 @@ public class SpinnerBindingAdapter {
 
     }
 
-    @InverseBindingAdapter(attribute = "bind:expYr",
-            event = "bind:expYrChanged")
+    @InverseBindingAdapter(attribute = "expYr",
+            event = "expYrChanged")
     public static String getExpYr(final AppCompatSpinner spinner) {
         return (String) spinner.getSelectedItem();
     }
@@ -103,6 +107,23 @@ public class SpinnerBindingAdapter {
             }
         }
         return 0;
+    }
+
+    @BindingAdapter("onFocus")
+    public static void bindFocusChange(EditText editText, View.OnFocusChangeListener onFocusChangeListener) {
+        if (editText.getOnFocusChangeListener() == null) {
+            editText.setOnFocusChangeListener(onFocusChangeListener);
+        }
+    }
+
+    @BindingAdapter({"imageUrl"})
+    public static void loadImage(ImageView view, String imageUrl) {
+        int resourceId = view.getContext().getResources().getIdentifier("" + imageUrl, "drawable", view.getContext().getPackageName());
+        if (imageUrl != null && !imageUrl.isEmpty()) {
+            Picasso.with(view.getContext())
+                    .load(resourceId)
+                    .into(view);
+        }
     }
 
 

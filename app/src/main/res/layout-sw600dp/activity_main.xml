@@ -60,9 +60,9 @@
                 android:id="@+id/cc_number_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/std_padding"
+                android:layout_marginStart="@dimen/tablet_margin"
                 android:layout_marginTop="@dimen/std_padding"
-                android:layout_marginEnd="@dimen/std_padding"
+                android:layout_marginEnd="@dimen/tablet_margin"
                 android:background="@drawable/linear_layout_bg"
                 android:orientation="horizontal"
                 android:padding="@dimen/std_padding"
@@ -191,26 +191,26 @@
                 android:id="@+id/card_type_image"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:contentDescription="@string/cc_image"
                 app:imageUrl="@{viewModel.imageUrl}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/guideline"
-                app:layout_constraintTop_toBottomOf="@id/cvv_ll" />
+                app:layout_constraintEnd_toStartOf="@id/cvv_ll"
+                app:layout_constraintStart_toEndOf="@id/expiry_ll"
+                app:layout_constraintTop_toBottomOf="@id/cc_number_ll" />
 
             <LinearLayout
                 android:id="@+id/first_name_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/std_padding"
+                android:layout_marginStart="@dimen/tablet_margin"
                 android:layout_marginTop="@dimen/std_padding"
-                android:layout_marginEnd="@dimen/std_padding"
+                android:layout_marginEnd="@dimen/tablet_margin"
                 android:background="@drawable/linear_layout_bg"
                 android:orientation="horizontal"
                 android:padding="@dimen/std_padding"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/card_type_image">
+                app:layout_constraintTop_toBottomOf="@id/expiry_ll">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -237,9 +237,9 @@
                 android:id="@+id/last_name_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/std_padding"
+                android:layout_marginStart="@dimen/tablet_margin"
                 android:layout_marginTop="@dimen/std_padding"
-                android:layout_marginEnd="@dimen/std_padding"
+                android:layout_marginEnd="@dimen/tablet_margin"
                 android:background="@drawable/linear_layout_bg"
                 android:orientation="horizontal"
                 android:padding="@dimen/std_padding"

@@ -1,16 +1,16 @@
 package com.sjani.creditcardchecker.model;
 
-import androidx.databinding.BaseObservable;
-import androidx.databinding.Bindable;
-import androidx.lifecycle.MutableLiveData;
+        import androidx.databinding.BaseObservable;
+        import androidx.databinding.Bindable;
+        import androidx.lifecycle.MutableLiveData;
 
-import com.sjani.creditcardchecker.checkers.LuhnChecker;
-import com.sjani.creditcardchecker.checkers.ValidCardChecker;
+        import com.sjani.creditcardchecker.checkers.LuhnChecker;
+        import com.sjani.creditcardchecker.checkers.ValidCardChecker;
 
-import java.util.regex.Pattern;
+        import java.util.regex.Pattern;
 
 /**
- *  Credit Card Form Model
+ * Credit Card Form Model
  */
 public class CreditCardForm extends BaseObservable {
 
@@ -20,6 +20,7 @@ public class CreditCardForm extends BaseObservable {
 
     /**
      * Checks Validity of the card
+     *
      * @return
      */
     @Bindable
@@ -42,6 +43,7 @@ public class CreditCardForm extends BaseObservable {
 
     /**
      * Checks if card number is valid
+     *
      * @return
      */
     public boolean isValidCardNumber() {
@@ -55,10 +57,11 @@ public class CreditCardForm extends BaseObservable {
 
     /**
      * Checks if cvv is valid
+     *
      * @return
      */
     public boolean isValidCvv() {
-        if (creditCard.getCardType() != null && creditCard.getLastName() != null) {
+        if (creditCard.getCardType() != null && creditCard.getCvv() != null) {
             if (creditCard.getCardType().equals("american_express"))
                 return Pattern.matches("[a-zA-Z]+", creditCard.getCvv()) == false && creditCard.getCvv().length() == 4;
             else
@@ -69,22 +72,25 @@ public class CreditCardForm extends BaseObservable {
 
     /**
      * Checks if first name is valid
+     *
      * @return
      */
     public boolean isValidFirstName() {
-        return !creditCard.getFirstName().isEmpty();
+        return !creditCard.getFirstName().isEmpty() && creditCard.getFirstName().matches("[a-zA-Z\\s]+");
     }
 
     /**
      * Checks if last name is valid
+     *
      * @return
      */
     public boolean isValidLastName() {
-        return !creditCard.getLastName().isEmpty();
+        return !creditCard.getLastName().isEmpty() && creditCard.getLastName().matches("[a-zA-Z\\s]+");
     }
 
     /**
      * Checks if expiry month is valid
+     *
      * @return
      */
     public boolean isValidExpiryMonth() {
@@ -93,6 +99,7 @@ public class CreditCardForm extends BaseObservable {
 
     /**
      * Checks if expiry year is valid
+     *
      * @return
      */
     public boolean isValidExpiryYear() {
