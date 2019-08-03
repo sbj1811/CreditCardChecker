@@ -2,6 +2,7 @@ package com.sjani.creditcardchecker;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -43,23 +44,26 @@ public class MainActivity extends AppCompatActivity {
         activityMainBinding.setViewModel(viewModel);
         activityMainBinding.setSpinAdapterMonth(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, months));
         activityMainBinding.setSpinAdapterYear(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, years));
-        activityMainBinding.cvvInfo.setOnClickListener(imageView -> {
-            final Dialog dialog = new Dialog(MainActivity.this);
-            dialog.setContentView(R.layout.info_dialog);
-            String title = getString(R.string.cvv_dialog_title);
-            dialog.setTitle(title);
-            TextView text = (TextView) dialog.findViewById(R.id.cvv_dialog_text);
-            String message = getString(R.string.cvv_info_text_line_1) + "\n\n" +
-                    getString(R.string.cvv_info_text_line_2);
-            text.setText(message);
-            ImageView image = (ImageView) dialog.findViewById(R.id.cvv_dialog_image);
+        activityMainBinding.cvvInfo.setOnClickListener(click -> setupDialog());
+        activityMainBinding.btnSave.setOnClickListener(click -> setupSubmitbutton());
+    }
 
-            Button dialogButton = (Button) dialog.findViewById(R.id.cvv_dialog_button);
-            dialogButton.setOnClickListener(button -> dialog.dismiss());
-
-            dialog.show();
-        });
-        setupSubmitbutton();
+    /**
+     * Sets up cvv info dialog
+     */
+    private void setupDialog() {
+        final Dialog dialog = new Dialog(MainActivity.this);
+        dialog.setContentView(R.layout.info_dialog);
+        String title = getString(R.string.cvv_dialog_title);
+        dialog.setTitle(title);
+        TextView text = (TextView) dialog.findViewById(R.id.cvv_dialog_text);
+        String message = getString(R.string.cvv_info_text_line_1) + "\n\n" +
+                getString(R.string.cvv_info_text_line_2);
+        text.setText(message);
+        ImageView image = (ImageView) dialog.findViewById(R.id.cvv_dialog_image);
+        Button dialogButton = (Button) dialog.findViewById(R.id.cvv_dialog_button);
+        dialogButton.setOnClickListener(button -> dialog.dismiss());
+        dialog.show();
     }
 
     /**

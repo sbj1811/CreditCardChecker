@@ -24,11 +24,11 @@ Checks the validity of a credit card.
 
 ## Examples:
  
-"3379513561108795" -> Valid but not issued
-"371449635398431"  -> Valid and issued by AMEX
-"6011111111111117" -> Valid and issued by Discover
-"5555555555554444" -> Valid and issued by Master Card
-"4111111111111111" -> Valid and issued by Visa
+    "3379513561108795" -> Valid but not issued
+    "371449635398431"  -> Valid and issued by AMEX
+    "6011111111111117" -> Valid and issued by Discover
+    "5555555555554444" -> Valid and issued by Master Card
+    "4111111111111111" -> Valid and issued by Visa
 
 ![CCC App][CCC-app]
 

@@ -71,12 +71,10 @@ public class CreditCardViewModel extends ViewModel {
 
 
     public MutableLiveData<Boolean> getCreditCardData() {
+        creditCardForm.onClick();
         return creditCardForm.getCreditCardMutableLiveData();
     }
 
-    public void onShowData() {
-        creditCardForm.onClick();
-    }
 
     public CreditCardForm getCreditCardForm() {
         return creditCardForm;
